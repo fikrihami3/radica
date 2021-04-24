@@ -1,0 +1,158 @@
+<!-- 
+    Name: Muhammad Fikri Bin Hamidan 
+    About: Internship - Radica Software sort js 
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Radica Software - Sorting Test</title>
+    </head>
+    <body>
+                                                                                                                            <!-- get input from user -->
+        <input type="text" name="userID" id="userID" value="1" disabled/>                                                   <!-- disable so user cannot input their own value -->
+        <input type="text" name="userName" id="userName" placeholder="UserName" />
+        <input type="text" name="userOccupation" id="userOccupation" placeholder="UserOccupation"/>
+        <input type="button" id="add" value="Add" onClick="addUser()">                                                      <!-- go to addUser function -->   
+        <br>
+        <br>
+
+        <select name="sorting" onchange=sortingFunction(this.value)>                                                        <!-- go to sorting function -->
+            <option value="option" placeholder="option" hidden></option>                                                    <!-- make an empty choice -->
+            <option value="UserID">UserID</option>
+            <option value="UserName">UserName</option>
+            <option value="UserOccupation">UserOccupation</option>
+        </select>
+        <br>
+        <br>
+
+
+        <table id="table" border="1">
+
+            <tbody id="tbody">
+            </tbody>
+
+        </table>
+    </body>
+</html>
+
+<script>
+
+    var userList = [];                                                                                                      // create array name userList 
+
+    function addUser(){
+
+                                                                                                                            //get each element value from user input
+        var userID = document.getElementById("userID").value;
+        var userName = document.getElementById("userName").value;
+        var userOccupation = document.getElementById("userOccupation").value;
+
+        userList.push([userID, userName, userOccupation]);                                                                  //push the element inside userList array
+
+        var x = document.getElementById("userID").value;                                                                    //to assign value of id to x 
+        x++;                                                                                                                //update value x = x+1
+        document.getElementById("userID").value = x;                                                                        //assign value x to userID
+    }
+    
+    function sortingFunction(option) {            
+        if(option=="UserID"){
+            for (var i=0; i<userList.length; i++){
+                                                                                                                            //create table outline using createElement
+                var tBody = document.getElementById("tbody");
+                var row = document.createElement("tr");
+                var idColumn = document.createElement("td");
+                var nameColumn = document.createElement("td");
+                var occupationColumn = document.createElement("td");
+
+                
+                userList.sort(sortFunction);
+                                                                                                                            //https://stackoverflow.com/questions/16096872/how-to-sort-2-dimensional-array-by-column-value
+                function sortFunction(a, b) {
+                    if (a[0] === b[0]) {                                                                                    // if value a equal to b then no need to do anything
+                        return 0;
+                    }
+                    else {
+                        return (a[0] < b[0]) ? -1 : 1;                                                                      //sort by using 1st column                                                               
+                    }
+                }
+                                                                                                                            //to write ouput
+                idColumn.innerHTML = userList[i][0];                                                                
+                nameColumn.innerHTML = userList[i][1];
+                occupationColumn.innerHTML  = userList[i][2];
+                                                                                                                            
+                row.appendChild(idColumn);                                                                                   //append from idColumn to a row
+                row.appendChild(nameColumn);                                                                                 //append from nameColumn to a row
+                row.appendChild(occupationColumn);                                                                           //append from OccupationColumn to a row
+                
+                tBody.appendChild(row);
+            }
+        }
+
+        else if(option=="UserName"){
+            for (var i=0; i<userList.length; i++){
+                                                                                                                            //create table outline using createElement
+                var tBody = document.getElementById("tbody");
+                var row = document.createElement("tr");
+                var idColumn = document.createElement("td");
+                var nameColumn = document.createElement("td");
+                var occupationColumn = document.createElement("td");
+
+                
+                userList.sort(sortFunction);
+                                                                                                                            //https://stackoverflow.com/questions/16096872/how-to-sort-2-dimensional-array-by-column-value
+                function sortFunction(a, b) {
+                    if (a[0] === b[0]) {                               
+                        return 0;                                   
+                    }
+                    else {
+                        return (a[1] < b[1]) ? -1 : 1;                                                                      //sort using 2nd column                                                                
+                    }
+                }
+                                                                                                                            //to write ouput
+                idColumn.innerHTML = userList[i][0];
+                nameColumn.innerHTML = userList[i][1];
+                occupationColumn.innerHTML  = userList[i][2];
+                
+                row.appendChild(idColumn);                                                                                  //append from idColumn to a row
+                row.appendChild(nameColumn);                                                                                //append from nameColumn to a row
+                row.appendChild(occupationColumn);                                                                          //append from OccupationColumn to a row
+                
+                tBody.appendChild(row);
+
+            }
+        }
+
+        else if(option=="UserOccupation"){
+            for (var i=0; i<userList.length; i++){
+                //create table outline using createElement
+                var tBody = document.getElementById("tbody");
+                var row = document.createElement("tr");
+                var idColumn = document.createElement("td");
+                var nameColumn = document.createElement("td");
+                var occupationColumn = document.createElement("td");
+
+                
+                userList.sort(sortFunction);
+
+                function sortFunction(a, b) {
+                    if (a[0] === b[0]) {
+                        return 0;
+                    }
+                    else {
+                        return (a[2] < b[2]) ? -1 : 1;
+                    }
+                }
+                
+                idColumn.innerHTML = userList[i][0];
+                nameColumn.innerHTML = userList[i][1];
+                occupationColumn.innerHTML  = userList[i][2];
+                
+                row.appendChild(idColumn);
+                row.appendChild(nameColumn);
+                row.appendChild(occupationColumn);
+                
+                tBody.appendChild(row);
+            }
+        }
+    }
+</script>
